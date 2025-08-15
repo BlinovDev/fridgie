@@ -1,0 +1,43 @@
+<%= form_with url: recipes_path,
+              method: :get,
+              local: true,
+              class: "mb-4 row gx-2 align-items-center",
+              data: {
+                controller: "search",
+                action: "submit->search#onSubmit",
+                search_initial_products_value: Array(params[:products]).to_json
+              } do |form| %>
+
+  <div class="col-11">
+    <%= form.text_field :query,
+                        placeholder: "e.g. bread, chicken...",
+                        class: "form-control",
+                        data: {
+                          search_target: "input",
+                          action: "keydown.enter->search#enterPressed"
+                        } %>
+  </div>
+
+  <div class="col-auto">
+    <%= form.submit "Search", class: "btn btn-primary" %>
+  </div>
+
+  <div class="mt-2" data-search-target="tags"></div>
+  <div data-search-target="hidden"></div>
+<% end %>
+
+<% if @recipes.any? %>
+  <div class="row row-cols-1 row-cols-md-2 g-3">
+    <% @recipes.each do |recipe| %>
+      <div class="col">
+        <%= render partial: 'recipe', locals: { recipe: recipe } %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="alert alert-warning mt-4">No recipes found.</div>
+<% end %>
+
+<div class="mt-4 d-flex justify-content-center">
+  <%= paginate @recipes, params: { products: params[:products] } %>
+</div>

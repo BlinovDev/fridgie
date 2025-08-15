@@ -1,0 +1,16 @@
+<div class="card h-100">
+  <% if recipe.image.present? %>
+                <img src="<%= recipe.image %>"
+                     alt="<%= recipe.title %>"
+                     class="card-img-top"
+                     style="object-fit:cover;max-height:180px;"
+                     onerror="this.onerror=null;this.src='https://via.placeholder.com/180x120?text=No+Image';">
+  <% end %>
+  <div class="card-body">
+    <h5 class="card-title"><%= link_to recipe.title, recipe_path(recipe), class: "text-decoration-none" %></h5>
+    <p class="mb-1"><strong>Category:</strong> <%= recipe.category %></p>
+    <p class="mb-1"><strong>Author:</strong> <%= recipe.author %></p>
+    <p class="mb-1"><strong>Rating:</strong> <%= recipe.ratings %></p>
+    <p class="mb-1"><strong>Prep/Cook time:</strong> <%= recipe.prep_time %> / <%= recipe.cook_time %> min</p>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="card mb-4 shadow-sm">
+  <% if @recipe.image.present? %>
+    <img src="<%= @recipe.image %>"
+         alt="<%= @recipe.title %>"
+         class="card-img-top"
+         style="object-fit:cover;max-height:340px;"
+         onerror="this.onerror=null;this.src='https://via.placeholder.com/340x180?text=No+Image';">
+  <% end %>
+  <div class="card-body">
+    <h2 class="card-title mb-3"><%= @recipe.title %></h2>
+
+    <ul class="list-unstyled mb-4">
+      <li><strong>Category:</strong> <%= @recipe.category %></li>
+      <li><strong>Author:</strong> <%= @recipe.author %></li>
+      <li><strong>Rating:</strong> <%= @recipe.ratings %></li>
+      <li><strong>Prep time:</strong> <%= @recipe.prep_time %> min</li>
+      <li><strong>Cook time:</strong> <%= @recipe.cook_time %> min</li>
+    </ul>
+
+    <h5>Ingredients</h5>
+    <ul class="mb-4">
+      <% Array(@recipe.ingredients_list).each do |ingredient| %>
+        <li><%= ingredient %></li>
+      <% end %>
+    </ul>
+
+    <%= link_to "Back to recipes", recipes_path, class: "btn btn-outline-primary" %>
+  </div>
+</div>
