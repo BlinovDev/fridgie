@@ -32,11 +32,13 @@ require "capistrano/rails"
 require "capistrano/rails/assets"
 require "capistrano/rails/migrations"
 require "capistrano/yarn"
-require "capistrano/puma"
-require "capistrano/puma/systemd" # systemd integration
+# require "capistrano/puma"
+# require "capistrano/puma/systemd" # systemd integration
 
 install_plugin Capistrano::Puma
 install_plugin Capistrano::Puma::Systemd
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
+
+after 'deploy:publishing', 'puma:restart'
