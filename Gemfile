@@ -63,7 +63,7 @@ group :development do
   gem "capistrano-rails", "~> 1.6"
   gem "capistrano-rbenv", "~> 2.2"
   gem "capistrano-bundler", "~> 2.1"
-  gem "capistrano3-puma", "~> 6.0"   # Puma via systemd/hooks
+  # gem "capistrano3-puma", "~> 6.0"   # Puma via systemd/hooks
   gem "capistrano-yarn", "~> 2.0"    # to run yarn:install on deploy
 end
 
