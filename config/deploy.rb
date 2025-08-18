@@ -18,8 +18,11 @@ append :linked_files, "config/master.key", ".env", "config/database.yml" # if yo
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets",
        "public/assets", "storage", "node_modules"
 
+# bundler
+set :bundle_without, %w[test development].join(' ')
+
 # Keep releases
-set :keep_releases, 5
+set :keep_releases, 3
 
 # Yarn (run before assets:precompile)
 before "deploy:assets:precompile", "yarn:install"

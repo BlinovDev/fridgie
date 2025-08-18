@@ -61,12 +61,10 @@
 #   }
 
 # config/deploy/production.rb
-server ENV["SERVER_IP"], user: "deploy", roles: %w[app db web]
+server 'fridgie.nextony.online', user: 'deploy', roles: %w[app db web]
 
 set :rails_env, "production"
 set :puma_service_unit_name, "puma_#{fetch(:application)}"
-
-server 'fridgie.nextony.online', user: 'deploy', roles: %w[app db web]
 
 # (опционально, но удобно)
 set :branch, 'main'              # или твоя ветка
