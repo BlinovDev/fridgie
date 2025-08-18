@@ -3,7 +3,7 @@ lock "~> 3.19.2"
 
 # App identity
 set :application, "fridgie"
-# set :repo_url, "git@github.com:YOUR_ORG/fridgie.git"  # or SSH to your repo
+set :repo_url, "git@github.com:BlinovDev/fridgie.git"
 set :branch, ENV.fetch("BRANCH", "main")
 
 # Deploy directory on server
@@ -14,7 +14,7 @@ set :rbenv_type, :user
 set :rbenv_ruby, "3.4.4"
 
 # Linked files/dirs (shared between releases)
-append :linked_files, "config/master.key", ".env" # if you use dotenv
+append :linked_files, "config/master.key", ".env", "config/database.yml" # if you use dotenv
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets",
        "public/assets", "storage", "node_modules"
 

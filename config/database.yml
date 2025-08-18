@@ -78,21 +78,32 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+
+
 production:
-  primary: &primary_production
-    <<: *default
-    database: fridgie_production
-    username: fridgie
-    password: <%= ENV["FRIDGIE_DATABASE_PASSWORD"] %>
-  cache:
-    <<: *primary_production
-    database: fridgie_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: fridgie_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: fridgie_production_cable
-    migrations_paths: db/cable_migrate
+  adapter: postgresql
+  encoding: unicode
+  database: fridgie_production
+  pool: 10
+  username: fridgie_user
+  password: <%= ENV["FRIDGIE_DB_PASSWORD"] %>
+  host: 127.0.0.1
+
+#production:
+#  primary: &primary_production
+#    <<: *default
+#    database: fridgie_production
+#    username: fridgie
+#    password: <%#= ENV["FRIDGIE_DATABASE_PASSWORD"] %>
+#  cache:
+#    <<: *primary_production
+#    database: fridgie_production_cache
+#    migrations_paths: db/cache_migrate
+#  queue:
+#    <<: *primary_production
+#    database: fridgie_production_queue
+#    migrations_paths: db/queue_migrate
+#  cable:
+#    <<: *primary_production
+#    database: fridgie_production_cable
+#    migrations_paths: db/cable_migrate
