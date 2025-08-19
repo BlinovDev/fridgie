@@ -29,26 +29,26 @@
 threads_count = ENV.fetch("RAILS_MAX_THREADS", 3)
 threads threads_count, threads_count
 
-# Specifies the `port` that Puma will listen on to receive requests; default is 3000.
-port ENV.fetch("PORT", 3000)
+workers Integer(ENV.fetch("WEB_CONCURRENCY", 1))
+preload_app!
 
+env = ENV.fetch("RAILS_ENV", "development")
 app_dir = File.expand_path("..", __dir__)
-shared_dir = File.expand_path("../shared", app_dir)
 
 directory app_dir
-environment ENV.fetch("RAILS_ENV", "development")
+environment env
 
-threads_count = Integer(ENV.fetch("RAILS_MAX_THREADS", 5))
-threads threads_count, threads_count
-workers Integer(ENV.fetch("WEB_CONCURRENCY", 1))
-
-bind "unix://#{shared_dir}/tmp/sockets/puma.sock"
-pidfile "#{shared_dir}/tmp/pids/puma.pid"
-state_path "#{shared_dir}/tmp/pids/puma.state"
-
-stdout_redirect "#{shared_dir}/log/puma_access.log", "#{shared_dir}/log/puma_error.log", true
-
-preload_app!
+if env == 'production'
+  shared_dir = File.expand_path("../shared", app_dir)
+  bind "unix://#{shared_dir}/tmp/sockets/puma.sock"
+  pidfile "#{shared_dir}/tmp/pids/puma.pid"
+  state_path "#{shared_dir}/tmp/pids/puma.state"
+  stdout_redirect "#{shared_dir}/log/puma_access.log", "#{shared_dir}/log/puma_error.log", true
+else
+  port ENV.fetch('PORT', 3000)
+  pidfile 'tmp/pids/puma.pid'
+  state_path 'tmp/pids/puma.state'
+end
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
