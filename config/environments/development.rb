@@ -73,4 +73,6 @@ Rails.application.configure do
   config.public_file_server.enabled = true
   config.assets.prefix = '/assets'
   config.assets.quiet = true
+
+  config.action_mailer.default_url_options = { host: "localhost", port: 3000, protocol: "http" }
 end
