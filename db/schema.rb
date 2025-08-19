@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_03_162630) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_19_063315) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -37,10 +37,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_162630) do
     t.string "cuisine"
     t.string "category"
     t.string "author"
-    t.string "image"
+    t.string "image_url"
     t.jsonb "ingredients_list"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_path"
+    t.index ["image_path"], name: "index_recipes_on_image_path"
   end
 
   add_foreign_key "recipe_ingredients", "ingredients"
