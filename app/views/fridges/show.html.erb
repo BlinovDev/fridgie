@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2><%= @fridge.name %></h2>
+  <div>
+    <%= link_to "Edit", edit_fridge_path(@fridge), class: "btn btn-outline-secondary me-2" %>
+    <%= link_to "Delete", @fridge, data: { turbo_method: :delete, turbo_confirm: "Delete this fridge?" }, class: "btn btn-outline-danger" %>
+  </div>
+</div>
+
+<h5 class="mb-2">Items</h5>
+
+<% if @fridge.fridge_items.any? %>
+  <ul class="list-group mb-3">
+    <% @fridge.fridge_items.order(:name).each do |item| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span><%= item.name %></span>
+        <%= link_to "Remove", fridge_fridge_item_path(@fridge, item),
+                    data: { turbo_method: :delete, turbo_confirm: "Remove this item?" },
+                    class: "btn btn-sm btn-outline-danger" %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <div class="alert alert-light">No items yet.</div>
+<% end %>
+
+<div class="card">
+  <div class="card-body">
+    <%= form_with model: @fridge_item, url: fridge_fridge_items_path(@fridge), local: true, class: "row gx-2 align-items-end" do |f| %>
+      <div class="col-sm-10">
+        <%= f.label :name, "Add item", class: "form-label" %>
+        <%= f.text_field :name, class: "form-control", placeholder: "e.g. chicken, bread" %>
+      </div>
+      <div class="col-sm-2">
+        <%= f.submit "Add", class: "btn btn-secondary w-100" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<h3 class="mt-4">Dishes possible to cook with your products:</h3>
+
+<% if @recipes.any? %>
+  <div class="row row-cols-1 row-cols-md-3 g-3">
+    <% @recipes.each do |recipe| %>
+      <div class="col">
+        <%= render partial: "recipes/recipe", locals: { recipe: recipe } %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-4 d-flex justify-content-center">
+    <%= paginate @recipes %>
+  </div>
+<% else %>
+  <div class="alert alert-warning mt-4">No recipes found.</div>
+<% end %>

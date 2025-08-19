@@ -1,0 +1,14 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Your fridges</h2>
+  <%= link_to "New fridge", new_fridge_path, class: "btn btn-secondary" %>
+</div>
+
+<% if @fridges.any? %>
+  <div class="list-group">
+    <% @fridges.each do |fridge| %>
+      <%= link_to fridge.name, fridge_path(fridge), class: "list-group-item list-group-item-action" %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="alert alert-info">You have no fridges yet.</div>
+<% end %>
