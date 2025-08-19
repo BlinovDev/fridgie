@@ -1,6 +1,8 @@
 <div class="card mb-4 shadow-sm">
-  <% if @recipe.image.present? %>
-    <img src="<%= @recipe.image %>"
+  <% if @recipe.image_url.present? %>
+    <% image_src = @recipe.image_path.presence || @recipe.image_url %>
+
+    <img src="<%= image_src %>"
          alt="<%= @recipe.title %>"
          class="card-img-top"
          style="object-fit:cover;max-height:340px;"
