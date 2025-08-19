@@ -1,0 +1,6 @@
+<%= form_with model: @fridge, local: true, class: "mt-3" do |f| %>
+  <div class="mb-3">
+    <%= f.text_field :name, class: "form-control", autofocus: true %>
+  </div>
+  <%= f.submit "Create", class: "btn btn-secondary" %>
+<% end %>
