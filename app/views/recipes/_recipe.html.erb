@@ -1,17 +1,36 @@
 <%= link_to recipe_path(recipe), class: "text-decoration-none text-reset" do %>
-  <div class="card h-100 shadow-sm">
-    <%= image_tag recipe_image_src(recipe),
-                  class: "card-img-top recipe-img",
-                  alt: recipe.title,
-                  loading: "lazy" %>
+  <div
+    class="card h-100 shadow-sm recipe-card"
+    data-controller="hover-preview"
+    data-hover-preview-delay-value="1500"
+  data-action="
+    mouseenter->hover-preview#enter
+    mouseleave->hover-preview#leave
+    focusin->hover-preview#enter
+    focusout->hover-preview#leave
+  ">
 
-    <div class="card-body d-flex flex-column">
-      <h5 class="card-title mb-2"><%= recipe.title %></h5>
+  <%= image_tag recipe_image_src(recipe),
+                class: "card-img-top recipe-img",
+                alt: recipe.title,
+                loading: "lazy" %>
 
-      <% ing = parse_ingredients(recipe.ingredients_list) %>
-      <div class="ingredients-list mb-2">
-        <%= render_ingredients(ing, @products || [], limit: 10) %>
-      </div>
+  <div class="card-body d-flex flex-column">
+    <h5 class="card-title mb-2"><%= recipe.title %></h5>
+
+    <% ing = parse_ingredients(recipe.ingredients_list) %>
+    <div class="ingredients-list mb-2">
+      <%= render_ingredients(ing, @products || [], limit: 10) %>
     </div>
+
+    <template data-hover-preview-target="template">
+      <div class="preview-content">
+        <h6 class="mb-2"><%= recipe.title %></h6>
+        <div class="mb-2">
+          <%= render_ingredients(ing, @products || [], limit: nil) %>
+        </div>
+      </div>
+    </template>
+  </div>
   </div>
 <% end %>

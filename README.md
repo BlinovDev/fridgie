@@ -20,3 +20,10 @@ This will make the app run, but with no data.
 # following command will deploy to Prod actual version of main branch
 bundle exec cap production deploy
 ```
+
+### TODO
+
+-[ ] Add specs;
+-[ ] Add swagger;
+-[ ] Custom error pages;
+-[ ] Optimise logging;
