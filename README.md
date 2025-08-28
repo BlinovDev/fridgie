@@ -21,6 +21,17 @@ This will make the app run, but with no data.
 bundle exec cap production deploy
 ```
 
+### User Stories
+
+1. **Search for recipes from available products:**
+As an improvising home cook, I want to enter the ingredients I have on hand so that the service suggests recipes that include all of them, helping me decide what to cook without extra shopping.
+
+2. **Maintain personal ingredient “fridges”:**
+As a registered user, I want to create and name multiple fridges where I store lists of ingredients, so that I can reuse them later to find recipes without re‑entering items every time.
+
+3. **Rank recipe suggestions by fridge matches:**
+As a fridge owner, I want recipes to be ranked by how many of my fridge items they contain, so that the best‑matching meals appear first and I can minimize wasted food.
+
 ### TODO
 
 -[ ] Add specs;
